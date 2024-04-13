@@ -1,0 +1,71 @@
+﻿@model driveSync.Models.BookingDTO
+
+@{
+    ViewBag.Title = "Update";
+}
+<!--This form helps passengers update their booking-->
+<h2>Update Booking</h2>
+
+<form action="/Booking/Update/@Model.BookingId" method="POST">
+    <!--Add a hidden input field for the id-->
+    <input type="hidden" name="bookingId" value="@Model.BookingId" />
+    <input type="hidden" name="PassengerId" value="@Model.PassengerId" />
+    <input type="hidden" name="rideId" value="@Model.RideId" />
+    <input type="hidden" name="DriverId" value="@Model.DriverId" />
+
+    <div>
+        <label for="passengerfirstName">passengerfirstName:</label>
+        <input type="text" id="passengerfirstName" name="passengerfirstName" value="@Model.passengerFirstName" />
+    </div>
+    <div>
+        <label for="driverfirstName">driverfirstName:</label>
+        <input type="text" id="driverfirstName" name="driverfirstName" value="@Model.driverFirstName" />
+    </div>
+    <div>
+        <label for="startLocation">startLocation:</label>
+        <input type="text" id="startLocation" name="startLocation" value="@Model.startLocation" />
+    </div>
+    <div>
+        <label for="endLocation">endLocation:</label>
+        <input type="text" id="endLocation" name="endLocation" value="@Model.endLocation" />
+    </div>
+    <div>
+        <label for="price">price:</label>
+        <input type="text" id="price" name="price" value="@Model.price" />
+    </div>
+    <div>
+        <label for="time">time:</label>
+        <input type="text" id="time" name="time" value="@Model.Time" />
+    </div>
+    <div>
+        <label for="dayOftheweek">dayOftheweek:</label>
+        <input type="text" id="dayOftheweek" name="dayOftheweek" value="@Model.dayOftheweek" />
+    </div>
+    <div>
+        <label for="LuggageQuantity">LuggageQuantity:</label>
+        <input type="text" id="LuggageQuantity" name="LuggageQuantity" value="@Model.LuggageQuantity" />
+    </div>
+    <div>
+        <label for="LuggageWeight">LuggageWeight:</label>
+        <input type="text" id="LuggageWeight" name="LuggageWeight" value="@Model.LuggageWeight" />
+    </div>
+    <div>
+        <label for="LuggageSize">LuggageSize:</label>
+        <input type="text" id="LuggageSize" name="LuggageSize" value="@Model.LuggageSize" />
+    </div>
+    <div>
+        <label for="BagQuantity">BagQuantity:</label>
+        <input type="text" id="BagQuantity" name="BagQuantity" value="@Model.BagQuantity" />
+    </div>
+    <div>
+        <label for="BagWeight">BagWeight:</label>
+        <input type="text" id="BagWeight" name="BagWeight" value="@Model.BagWeight" />
+    </div>
+    <div>
+        <label for="BagSize">BagSize:</label>
+        <input type="text" id="BagSize" name="BagSize" value="@Model.BagSize" />
+    </div>
+    <div>
+        <input type="submit" value="Update Booking" />
+    </div>
+</form>

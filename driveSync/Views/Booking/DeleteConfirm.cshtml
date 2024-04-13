@@ -1,0 +1,25 @@
+﻿@model driveSync.Models.BookingDTO
+@{
+    ViewBag.Title = "DeleteConfirm";
+
+}
+<!--Deletes a booking from the database-->
+<h2>Are you sure you want to delete this booking</h2>
+<a href="/Booking/List">Cancel</a>
+<h3>@Model.passengerFirstName</h3>
+<h3>@Model.driverLastName</h3>
+<h3>@Model.startLocation</h3>
+<h3>@Model.endLocation</h3>
+<h3>@Model.price</h3>
+<h3>@Model.Time</h3>
+<h3>@Model.dayOftheweek</h3>
+<h3>@Model.LuggageQuantity</h3>
+<h3>@Model.LuggageWeight</h3>
+<h3>@Model.LuggageSize</h3>
+<h3>@Model.BagQuantity</h3>
+<h3>@Model.BagWeight</h3>
+<h3>@Model.BagSize</h3>
+
+<form action="/Booking/Delete/@Model.BookingId" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>

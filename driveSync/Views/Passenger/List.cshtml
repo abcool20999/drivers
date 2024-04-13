@@ -1,0 +1,166 @@
+﻿@model IEnumerable<driveSync.Models.PassengerDTO>
+@{
+    ViewBag.Title = "Passenger";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar {
+        float: left;
+        width: 200px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        height: 100vh;
+    }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sidebar .sbc {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+    .cnt {
+        margin-left: 220px;
+        padding: 20px;
+    }
+
+        .cnt h2 {
+            margin-bottom: 20px;
+        }
+
+        .cnt table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .cnt table th,
+            .cnt table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .cnt table th {
+                background-color: #f2f2f2;
+            }
+
+            .cnt table tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+    .input {
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .submit {
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .submit:hover {
+            background-color: #45a049;
+        }
+
+    .mbtn {
+        padding: 6px 12px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+        .mbtn.update {
+            background-color: #ffc107;
+        }
+
+        .mbtn.delete {
+            background-color: #dc3545;
+        }
+
+        .mbtn:hover {
+            opacity: 0.8;
+        }
+</style>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>driveSync</h2>
+    <!-- Navigation links -->
+    <div class="sbc"><a href="/Passenger/List">Passengers</a></div>
+    <div class="sbc"><a href="/Driver/List">Drivers</a></div>
+    <div class="sbc"><a href="">Bookings</a></div>
+</div>
+
+<div class="cnt">
+    <!-- Header -->
+    <h2>List of Passengers</h2>
+    <!-- Link to add a new trip -->
+    <a href="/Passenger/Add" class="mbtn">Add a Passenger</a>
+
+    <!-- Search form -->
+    <form action="" method="GET">
+        <div>
+            <input class="input" type="text" name="PassengerSearchKey" />
+            <input class="submit" type="submit" value="Search" />
+        </div>
+    </form>
+
+    <!-- Trips table -->
+    <table>
+        <thead>
+            <tr>
+                <th>firstName</th>
+                <th>lastName</th>
+                <th>username</th>
+                <th>email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var passenger in Model)
+            {
+                <tr>
+                    <!-- Display trip details -->
+                    <td>@passenger.firstName</td>
+                    <td>@passenger.lastName</td>
+                    <td>@passenger.username</td>
+                    <td>@passenger.email</td>
+                    @*<td>@ride.ItemName</td>
+                        <td>@ride.Quantity</td>
+                        <td>@ride.Weight</td>
+                        <td>@ride.Size</td>*@
+
+                    <td><a class="mbtn update" href="/Passenger/Edit/@passenger.PassengerId">Update</a></td>
+                    <td><a class="mbtn delete" href="/Passenger/DeleteConfirm/@passenger.PassengerId">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -1,0 +1,81 @@
+﻿<!--describing the view-->
+@model IEnumerable<driveSync.Models.BookingDTO>
+@{
+    ViewBag.Title = "Booking";
+}
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- logo -->
+    <h2 class="sbc">driveSync</h2>
+    <!-- Navigation links -->
+    <div class="sbc"><a href="/Passenger/List">Passengers</a></div>
+    <div class="sbc"><a href="/Driver/List">Drivers</a></div>
+    <div class="sbc"><a href="/Booking/List">Bookings</a></div>
+</div>
+<!-- Main content area -->
+<div class="cnt">
+    <div>
+        <!-- Header -->
+        <h2>List of Bookings</h2>
+        <!--for each loop that determines the info we wanna render for the bookings-->
+        <!-- Search form -->
+        <form action="" method="GET">
+            <div>
+                <input class="input" type="text" name="PassengerSearchKey" />
+                <input class="submit" type="submit" value="Search" />
+            </div>
+        </form>
+    </div>
+    <!-- Bookings table -->
+    <table>
+        <thead>
+            <tr>
+                <!-- Table headers -->
+                <td><b>passengerFirstname</b></td>
+                <td><b>driverFirstname</b></td>
+                <td><b>startLocation</b></td>
+                <td><b>endLocation</b></td>
+                <td><b>price</b></td>
+                <td><b>Time</b></td>
+                <td><b>LuggageQuantity</b></td>
+                <td><b>LuggageWeight</b></td>
+                <td><b>LuggageSize</b></td>
+                <td><b>BagQuantity</b></td>
+                <td><b>BagWeight</b></td>
+                <td><b>BagSize</b></td>
+                <td><b>update</b></td>
+                <td><b>delete</b></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- Loop through each booking -->
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <!-- Booking details -->
+                    <td>@booking.passengerFirstName</td>
+                    <td>@booking.driverFirstName</td>
+                    <td>@booking.startLocation</td>
+                    <td>@booking.endLocation</td>
+                    <td>@booking.price</td>
+                    <td>@booking.Time</td>
+                    <td>@booking.dayOftheweek</td>
+                    <td>@booking.LuggageQuantity</td>
+                    <td>@booking.LuggageWeight</td>
+                    <td>@booking.LuggageSize</td>
+                    <td>@booking.BagQuantity</td>
+                    <td>@booking.BagWeight</td>
+                    <td>@booking.BagSize</td>
+                    <!-- Update and delete links -->
+                    <td><a class="mbtn update" href="/Booking/Edit/@booking.BookingId">Update</a></td>
+                    <td><a class="mbtn delete" href="/Booking/DeleteConfirm/@booking.BookingId">Delete</a></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+</div>

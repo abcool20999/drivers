@@ -1,0 +1,98 @@
+﻿@model driveSync.Models.Driver
+@{
+    ViewBag.Title = "DriverProfile";
+}
+
+<h2>driveSync-DriverProfile</h2>
+<a href="/Ride/Add/@Model.DriverId" style="margin-right: 10px;">Add Ride</a>
+<a href="#" style="margin-right: 10px;">View Bookings</a>
+<a href="/Ride/List/@Model.DriverId" style="color: darkgreen;">List of Trips</a>
+
+
+@{
+
+    string firstName = Model.firstName;
+    string lastName = Model.lastName;
+    int age = Model.Age;
+    string email = Model.email;
+    string password = "********"; // Replace with actual password
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>driveSync - DriverProfile</title>
+    <style>
+        .container {
+            /*border: 1px solid #ccc;*/
+            padding: 20px;
+            width: 100vw;
+            margin: 5px auto;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+            .profile-info img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+
+            .profile-info div {
+                flex-grow: 1;
+                margin-left: 20px;
+            }
+
+                .profile-info div p {
+                    margin: 5px 0;
+                }
+
+        .button {
+            display: block;
+            width: 10%;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="border-box">
+            <div class="profile-info">
+                <img src="~/Content/profile.PNG" alt="Profile Picture">
+                <div>
+                    <p>@firstName @lastName</p>
+                    <p>Age: @age</p>
+                    <p>Email: @email</p>
+                    <p>Password: @password</p>
+                </div>
+            </div>
+
+            <button class="button" onclick="deleteProfile()">Delete Profile</button>
+        </div>
+    </div>
+    <script>
+        function deleteProfile() {
+            // Add logic to delete profile here
+            alert('Profile deleted!');
+        }
+    </script>
+</body>
+</html>

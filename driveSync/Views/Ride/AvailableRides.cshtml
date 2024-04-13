@@ -1,0 +1,85 @@
+﻿@model IEnumerable<driveSync.AvailableRidesDTO>
+
+@{
+    ViewBag.Title = "Available Rides";
+}
+
+<div class="d-flex flex-column">
+    @foreach (var rideinfo in Model)
+    {
+        <!--Trip Information Card-->
+        <div class="d-flex flex-row justify-content-between">
+            <div class="d-inline-block pe-2">
+                <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="37" cy="37" r="37" fill="#D9D9D9" />
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3333 27.4167C29.3333 25.3833 30.1411 23.4333 31.5788 21.9955C33.0166 20.5577 34.9667 19.75 37 19.75C39.0333 19.75 40.9834 20.5577 42.4212 21.9955C43.8589 23.4333 44.6667 25.3833 44.6667 27.4167C44.6667 29.45 43.8589 31.4 42.4212 32.8378C40.9834 34.2756 39.0333 35.0833 37 35.0833C34.9667 35.0833 33.0166 34.2756 31.5788 32.8378C30.1411 31.4 29.3333 29.45 29.3333 27.4167ZM29.3333 38.9167C26.7917 38.9167 24.3541 39.9263 22.5569 41.7236C20.7597 43.5208 19.75 45.9583 19.75 48.5C19.75 50.025 20.3558 51.4875 21.4341 52.5659C22.5125 53.6442 23.975 54.25 25.5 54.25H48.5C50.025 54.25 51.4875 53.6442 52.5659 52.5659C53.6442 51.4875 54.25 50.025 54.25 48.5C54.25 45.9583 53.2403 43.5208 51.4431 41.7236C49.6459 39.9263 47.2083 38.9167 44.6667 38.9167H29.3333Z" fill="black" />
+                </svg>
+            </div>
+            <!--Driver Information-->
+            <div class="d-inline-block pe-2">
+                <div>
+                    <b>@rideinfo.DriverFirstName @(rideinfo.DriverLastname?[0])</b>
+                </div>
+                <div>
+                    @rideinfo.DriverAge years old
+                </div>
+                <div>
+                    @rideinfo.CarType
+                </div>
+            </div>
+            <!-- Line Separator -->
+            <div class="d-inline-block pe-2 border-1 border-dark border-start">
+
+            </div>
+            <!--Trip Route Information-->
+
+            <div class="d-inline-block pe-2">
+                <div>
+                    <b>@rideinfo.StartLocation -> @rideinfo.EndLocation</b>
+                </div>
+                <div>
+                    <small>@rideinfo.WeekDay at @rideinfo.Time.ToLocalTime()</small>
+                </div>
+                <div>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 6.66666C14 11.3333 8 15.3333 8 15.3333C8 15.3333 2 11.3333 2 6.66666C2 5.07536 2.63214 3.54923 3.75736 2.42402C4.88258 1.2988 6.4087 0.666656 8 0.666656C9.5913 0.666656 11.1174 1.2988 12.2426 2.42402C13.3679 3.54923 14 5.07536 14 6.66666Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8 8.66666C9.10457 8.66666 10 7.77123 10 6.66666C10 5.56209 9.10457 4.66666 8 4.66666C6.89543 4.66666 6 5.56209 6 6.66666C6 7.77123 6.89543 8.66666 8 8.66666Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <small>@rideinfo.StartLocation</small>
+                </div>
+                <div>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 6.66666C14 11.3333 8 15.3333 8 15.3333C8 15.3333 2 11.3333 2 6.66666C2 5.07536 2.63214 3.54923 3.75736 2.42402C4.88258 1.2988 6.4087 0.666656 8 0.666656C9.5913 0.666656 11.1174 1.2988 12.2426 2.42402C13.3679 3.54923 14 5.07536 14 6.66666Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8 8.66666C9.10457 8.66666 10 7.77123 10 6.66666C10 5.56209 9.10457 4.66666 8 4.66666C6.89543 4.66666 6 5.56209 6 6.66666C6 7.77123 6.89543 8.66666 8 8.66666Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <small>@rideinfo.EndLocation</small>
+                </div>
+            </div>
+            <!-- Line Separator -->
+            <div class="d-inline-block pe-2">
+                <div>
+                    <b>CA $@rideinfo.Price</b>
+                </div>
+                <div>
+                    @(rideinfo.SpotsLeft==0? "FULL":$"{rideinfo.SpotsLeft} Spots Left")
+                </div>
+                <div>
+                    <form action="/Booking/CreateBooking" method="post">
+                        <input type="hidden" name="passengerId" value="@ViewBag.PassengerId" />
+                        <input type="hidden" name="rideId" value="@rideinfo.RideId" />
+                        @if (@rideinfo.SpotsLeft > 0)
+                        {
+                            <input type="submit" value="Book" class="btn bg-success" />
+                        }
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

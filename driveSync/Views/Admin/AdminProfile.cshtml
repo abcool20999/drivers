@@ -1,0 +1,97 @@
+﻿﻿﻿@{
+    ViewBag.Title = "AdminProfile";
+}
+
+<h2>driveSync-AdminProfile</h2>
+<a href="/Passenger/List" style="margin-right: 10px;">View Passengers</a>
+<a href="/Driver/List" style="color: darkgreen;">View Drivers</a>
+<a href="#" style="color: darkblue;">List of Bookings</a>
+
+
+@{
+
+    string firstName = "Abraham";
+    string lastName = "Awotunde";
+    int age = 24;
+    string email = "abcool20999@gmail.com";
+    string password = "********"; // Replace with actual password
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>driveSync - AdminProfile</title>
+    <style>
+        .container {
+            /*border: 1px solid #ccc;*/
+            padding: 20px;
+            width: 100vw;
+            margin: 5px auto;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+            .profile-info img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+
+            .profile-info div {
+                flex-grow: 1;
+                margin-left: 20px;
+            }
+
+                .profile-info div p {
+                    margin: 5px 0;
+                }
+
+        .button {
+            display: block;
+            width: 10%;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="border-box">
+            <div class="profile-info">
+                <img src="~/Content/profile.PNG" alt="Profile Picture">
+                <div>
+                    <p>@firstName @lastName</p>
+                    <p>Age: @age</p>
+                    <p>Email: @email</p>
+                    <p>Password: @password</p>
+                </div>
+            </div>
+
+            <button class="button" onclick="deleteProfile()">Delete Profile</button>
+        </div>
+    </div>
+    <script>
+        function deleteProfile() {
+            // Add logic to delete profile here
+            alert('Profile deleted!');
+        }
+    </script>
+</body>
+</html>
