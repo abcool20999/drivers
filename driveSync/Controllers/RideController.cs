@@ -245,6 +245,32 @@ public ActionResult Details(int id)
             return View();
         }
 
+        [HttpPost]
+        public ActionResult SearchForTripPost(int id, string location, string destination)
+        {
+            var availabletrips = _ridedatacontroller.SearchForRide(location, destination);
+
+            if (availabletrips == default)
+            {
+                return View("AvailableRides");
+            }
+
+            ViewBag.PassengerId = id;
+
+            return View("AvailableRides", availablerides);
+        }
+
+        // GET: Trip/Delete/5
+        public ActionResult DeleteConfirm(int id)
+        {
+            string url = "FindTrip/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            RideDTO selectedtrip = response.Content.ReadAsAsync<RideDTO>().Result;
+            return View(selectedtrip);
+
+        }
+
+
         // POST: Ride/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
