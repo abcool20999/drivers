@@ -164,6 +164,43 @@ namespace ridesnShare.Controllers
 
             return Ok(rideDTO);
         }
+
+        /// <summary>
+        /// Searches for trips based on the provided location and destination.
+        /// </summary>
+        /// <param name="location">The starting location of the trip.</param>
+        /// <param name="destination">The destination of the trip.</param>
+        /// <returns>
+        /// A list of available trips that match the search criteria.
+        /// </returns>
+        public List<AvailableRidesDTO> SearchForTrip(string location, string destination)
+        {
+            var trips = db.Trips.Include(t => t.Bookings).Where(t => t.startLocation == location
+                                        && t.endLocation == destination
+                                        //&& t.Time > DateTime.UtcNow
+                                        ).ToList();
+            var tripsinfo = new List<AvailableRidesDTO>();
+            Driver driver;
+            foreach (var trip in trips)
+            {
+                driver = db.Drivers.FirstOrDefault(d => d.DriverId == trip.DriverId);
+                tripsinfo.Add(new AvailableTripsDTO()
+                {
+                    TripId = trip.tripId,
+                    DriverFirstName = driver.firstName,
+                    DriverLastname = driver.lastName,
+                    StartLocation = trip.startLocation,
+                    EndLocation = trip.endLocation,
+                    Price = trip.price,
+                    SpotsLeft = 4 - trip.Bookings.Count(),
+                    DriverAge = driver.Age,
+                    CarType = driver.CarType ?? "Toyota",
+                    Time = trip.Time,
+                    WeekDay = trip.dayOftheweek
+                });
+            }
+            return tripsinfo;
+        }
         /// <summary>
         /// Updates information about a specific passenger in the database.
         /// </summary>
